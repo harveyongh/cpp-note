@@ -14,10 +14,10 @@ qt_standard_project_setup()
 
 qt_add_executable(cppnote ${SOURCE_FILES})
 
-target_link_libraries(cnote PRIVATE Qt6::Widgets Qt6::Core)
+target_link_libraries(cppnote PRIVATE Qt6::Widgets Qt6::Core)
 
 # Non-linux compatibility options
-set_target_properties(cnote PROPERTIES
+set_target_properties(cppnote PROPERTIES
   WIN32_EXECUTABLE ON
   MACOSX_BUNDLE ON
 )
