@@ -9,56 +9,59 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QStatusBar>
+#include <QString>
 #include <string>
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+namespace cppnote{
+    class MainWindow : public QMainWindow
+    {
+        Q_OBJECT
 
-    public:
-        MainWindow(const QString &title, QWidget *parent);
+        public:
+            MainWindow(QWidget *parent);
 
-    protected:
-        void closeEvent(QCloseEvent *event) override;
+        protected:
+            void closeEvent(QCloseEvent *event) override;
 
-    private slots:
-        void print();
-        void open();
-        void save(std::string="");// Handles save and save as
-        void cut();
-        void copy();
-        void paste();
-        void selectAll();
-        void del();// Shortened name for delete prevents conflict
-        void undo();
-        void redo();
-    
-    private:
-        void createActions();
-        void createMenus();
-        bool confirmUnsaved();
+        private slots:
+            void print();
+            void open();
+            void save(std::string="");// Handles save and save as
+            void cut();
+            void copy();
+            void paste();
+            void selectAll();
+            void del();// Shortened name for delete prevents conflict
+            void undo();
+            void redo();
 
-    private:
-        QTextEdit *textEditor;
-        QScrollBar *scrollBar;
-        QStatusBar *statusBar;
+        private:
+            void createActions();
+            void createMenus();
+            bool confirmUnsaved();
 
-        QMenu *menuFile;
-        QMenu *menuEdit;
+        private:
+            QTextEdit *textEditor;
+            QScrollBar *scrollBar;
+            QStatusBar *statusBar;
 
-        QAction actionNew;
-        QAction actionOpen;
-        QAction actionSave;
-        QAction actionSaveAs;
-        QAction actionPrint;
-        QAction actionCut;
-        QAction actionCopy;
-        QAction actionPaste;
-        QAction actionUndo;
-        QAction actionRedo;
-        QAction actionDelete;
-        QAction actionSelectAll;
+            QMenu *menuFile;
+            QMenu *menuEdit;
 
-};
+            QAction actionNew;
+            QAction actionOpen;
+            QAction actionSave;
+            QAction actionSaveAs;
+            QAction actionPrint;
+            QAction actionCut;
+            QAction actionCopy;
+            QAction actionPaste;
+            QAction actionUndo;
+            QAction actionRedo;
+            QAction actionDelete;
+            QAction actionSelectAll;
+
+    };
+}
 
 #endif // MAINWINDOW_H_
