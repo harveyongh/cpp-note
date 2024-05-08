@@ -54,7 +54,7 @@
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
-    <addaction name="actionSave_as"/>
+    <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
     <addaction name="actionPrint"/>
    </widget>
@@ -65,7 +65,7 @@
     <addaction name="actionCut"/>
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
-    <addaction name="actionSelect_all"/>
+    <addaction name="actionSelectAll"/>
     <addaction name="actionDelete"/>
     <addaction name="separator"/>
     <addaction name="actionUndo"/>
@@ -85,7 +85,7 @@
     <string>&amp;Save</string>
    </property>
   </action>
-  <action name="actionSave_as">
+  <action name="actionSaveAs">
    <property name="text">
     <string>Sa&amp;ve as</string>
    </property>
@@ -130,7 +130,7 @@
     <string>&amp;Delete</string>
    </property>
   </action>
-  <action name="actionSelect_all">
+  <action name="actionSelectAll">
    <property name="text">
     <string>&amp;Select all</string>
    </property>
