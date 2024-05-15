@@ -1,4 +1,5 @@
 #include "mainwindow.hpp"
+#include <QDir>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -13,6 +14,9 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         vbox = new QVBoxLayout(this);
         vbox->addWidget(menuBar);
         vbox->addWidget(textEditor);
+
+        QObject::connect(actionOpen, &QAction::triggered, 
+            this, &CnoteWindow::open);
 }
 
 void CnoteWindow::createMenus(){
@@ -40,4 +44,11 @@ void CnoteWindow::createActions(){
     actionRedo = new QAction ("&Redo", this);
     actionDelete = new QAction ("&Delete", this);
     actionSelectAll = new QAction ("&Select all", this);
+}
+
+void CnoteWindow::open(){
+    filename = QFileDialog::getOpenFileName(this,
+        tr("Open Text File"), QDir::currentPath(), 
+        tr("Text Files (*.txt *.rtf *.csv)"));
+    qInfo() << qPrintable(filename);
 }
