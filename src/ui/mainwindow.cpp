@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <QDir>
+#include <QFileDialog>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -50,5 +51,13 @@ void CnoteWindow::open(){
     filename = QFileDialog::getOpenFileName(this,
         tr("Open Text File"), QDir::currentPath(), 
         tr("Text Files (*.txt *.rtf *.csv)"));
-    qInfo() << qPrintable(filename);
+    QFile file(filename);
+    
+    if (!file.open(QFile::ReadOnly | QFile::Text)){
+        qWarning("Error opening selected file!");
+    }
+
+    QTextStream fileIn(&file);
+    textEditor->setText(fileIn.readAll());
+    file.close();
 }
