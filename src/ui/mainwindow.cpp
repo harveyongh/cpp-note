@@ -18,6 +18,8 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
 
         QObject::connect(actionOpen, &QAction::triggered, 
             this, &CnoteWindow::open);
+        QObject::connect(textEditor, SIGNAL (textChanged()), 
+            this, SLOT (setChanged()));
 }
 
 void CnoteWindow::createMenus(){
@@ -52,12 +54,17 @@ void CnoteWindow::open(){
         tr("Open Text File"), QDir::currentPath(), 
         tr("Text Files (*.txt *.rtf *.csv)"));
     QFile file(filename);
-    
+
     if (!file.open(QFile::ReadOnly | QFile::Text)){
         qWarning("Error opening selected file!");
     }
 
     QTextStream fileIn(&file);
     textEditor->setText(fileIn.readAll());
+    checkFileChanged = false;
     file.close();
+}
+
+void CnoteWindow::setChanged(){
+    checkFileChanged = true;
 }
