@@ -18,6 +18,9 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
 
         QObject::connect(actionOpen, &QAction::triggered, 
             this, &CnoteWindow::openFile);
+        QObject::connect(actionNew, &QAction::triggered,
+            this, &CnoteWindow::newFile);
+
         QObject::connect(textEditor, SIGNAL (textChanged()), 
             this, SLOT (setChanged()));
 }
