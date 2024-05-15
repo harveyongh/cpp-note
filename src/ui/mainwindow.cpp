@@ -4,24 +4,40 @@
 CnoteWindow::CnoteWindow(QWidget *parent) :
     QWidget(parent) {
         menuBar = new QMenuBar(this);
+        createActions();
         createMenus();
-        //scrollBar = new QScrollBar(this);
         textEditor = new QTextEdit(this);
         // Layout settings
-        setWindowTitle("&C++Note");
+        setWindowTitle("C++Note");
         resize(600, 400);
-        //windowLayout = new QGridLayout(this);
-        //windowLayout->addWidget(menuBar, 0, 0, 2, 3);
-        //windowLayout->addWidget(textEditor, 1, 0, 2, 3);
-        //windowLayout->addWidget(scrollBar, 1, 3);
         vbox = new QVBoxLayout(this);
         vbox->addWidget(menuBar);
         vbox->addWidget(textEditor);
 }
 
 void CnoteWindow::createMenus(){
-    
     menuFile = menuBar->addMenu("&File");
     menuEdit = menuBar->addMenu("&Edit");
+    QList<QAction*> fileActions = {actionNew, actionOpen,
+        actionSave, actionSaveAs, actionPrint};
+    QList<QAction*> editActions = {actionCut, actionCopy,actionPaste, 
+        actionUndo, actionRedo, actionDelete, actionSelectAll};
 
+    menuFile->addActions(fileActions);
+    menuEdit->addActions(editActions);
+}
+
+void CnoteWindow::createActions(){
+    actionNew = new QAction ("&New", this);
+    actionOpen = new QAction ("&Open", this);
+    actionSave = new QAction ("&Save", this);
+    actionSaveAs = new QAction ("&Save as", this);
+    actionPrint = new QAction ("&Print", this);
+    actionCut = new QAction ("&Cut", this);
+    actionCopy = new QAction ("&Copy", this);
+    actionPaste = new QAction ("&Paste", this);
+    actionUndo = new QAction ("&Undo", this);
+    actionRedo = new QAction ("&Redo", this);
+    actionDelete = new QAction ("&Delete", this);
+    actionSelectAll = new QAction ("&Select all", this);
 }
