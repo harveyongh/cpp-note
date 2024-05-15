@@ -17,7 +17,7 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         vbox->addWidget(textEditor);
 
         QObject::connect(actionOpen, &QAction::triggered, 
-            this, &CnoteWindow::open);
+            this, &CnoteWindow::openFile);
         QObject::connect(textEditor, SIGNAL (textChanged()), 
             this, SLOT (setChanged()));
 }
@@ -49,7 +49,7 @@ void CnoteWindow::createActions(){
     actionSelectAll = new QAction ("&Select all", this);
 }
 
-void CnoteWindow::open(){
+void CnoteWindow::openFile(){
     filename = QFileDialog::getOpenFileName(this,
         tr("Open Text File"), QDir::currentPath(), 
         tr("Text Files (*.txt *.rtf *.csv)"));
@@ -63,6 +63,12 @@ void CnoteWindow::open(){
     textEditor->setText(fileIn.readAll());
     checkFileChanged = false;
     file.close();
+}
+
+void CnoteWindow::newFile(){
+    textEditor->setText("");
+    filename = "";
+    checkFileChanged = false;
 }
 
 void CnoteWindow::setChanged(){

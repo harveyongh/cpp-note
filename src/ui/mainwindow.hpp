@@ -30,8 +30,9 @@ class CnoteWindow : public QWidget
     private slots:
         //void print();
         void setChanged();
-        void open();
-        //void save();// Handles save and save as
+        void openFile();
+        void newFile();
+        //void saveFile();// Handles save and save as
     signals:
         // Signals sent to editor from menu
         void cut();
