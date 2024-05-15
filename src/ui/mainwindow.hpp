@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QSaveFile>
 #include <QLayout>
+#include <QList>
 
 class CnoteWindow : public QWidget
 {
@@ -46,25 +47,23 @@ class CnoteWindow : public QWidget
         bool confirmUnsaved();
     private:
         QTextEdit *textEditor;
-        QScrollBar *scrollBar;
         QTextDocument *loadedDoc;
-        //QGridLayout *windowLayout;
         QVBoxLayout *vbox;
         QMenu *menuFile;
         QMenu *menuEdit;
         QMenuBar *menuBar;
-        QAction actionNew;
-        QAction actionOpen;
-        QAction actionSave;
-        QAction actionSaveAs;
-        QAction actionPrint;
-        QAction actionCut;
-        QAction actionCopy;
-        QAction actionPaste;
-        QAction actionUndo;
-        QAction actionRedo;
-        QAction actionDelete;
-        QAction actionSelectAll;
+        QAction *actionNew;
+        QAction *actionOpen;
+        QAction *actionSave;
+        QAction *actionSaveAs;
+        QAction *actionPrint;
+        QAction *actionCut;
+        QAction *actionCopy;
+        QAction *actionPaste;
+        QAction *actionUndo;
+        QAction *actionRedo;
+        QAction *actionDelete;
+        QAction *actionSelectAll;
 };
 
 #endif // MAINWINDOW_HPP
