@@ -30,7 +30,7 @@ class CnoteWindow : public QWidget
         //void closeEvent(QCloseEvent *event) override;
     private slots:
         //void print();
-        //void open(QString filename);
+        void open();
         //void save(QString filename);// Handles save and save as
     signals:
         // Signals sent to editor from menu
