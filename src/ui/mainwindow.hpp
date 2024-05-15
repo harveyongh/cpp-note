@@ -24,14 +24,14 @@ class CnoteWindow : public QWidget
         CnoteWindow(QWidget *parent = nullptr);
     private:
         QString filename = "";
-        void openDocument(QString filename);
-        void saveDocument(QString filename);
+        bool checkFileChanged = false;
     protected:
         //void closeEvent(QCloseEvent *event) override;
     private slots:
         //void print();
+        void setChanged();
         void open();
-        //void save(QString filename);// Handles save and save as
+        //void save();// Handles save and save as
     signals:
         // Signals sent to editor from menu
         void cut();
@@ -49,6 +49,7 @@ class CnoteWindow : public QWidget
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
         QVBoxLayout *vbox;
+        QDialog *confirmDialog;
         QMenu *menuFile;
         QMenu *menuEdit;
         QMenuBar *menuBar;
