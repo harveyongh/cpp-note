@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H_
-#define MAINWINDOW_H_
+#ifndef MAINWINDOW_HPP
+#define MAINWINDOW_HPP
 
 #include <QAction>
 #include <QMainWindow>
@@ -11,21 +11,28 @@
 #include <QStatusBar>
 #include <QString>
 #include <string>
-#include "../editor/texteditor.hpp"
+#include <QTextDocument>
+#include <QFile>
+#include <QSaveFile>
+#include <QLayout>
 
-class MainWindow : public QMainWindow
+class CnoteWindow : public QWidget
 {
     Q_OBJECT
     public:
-        MainWindow(QWidget *parent);
+        CnoteWindow(QWidget *parent = nullptr);
+    private:
+        QString filename = "";
+        void openDocument(QString filename);
+        void saveDocument(QString filename);
     protected:
-        void closeEvent(QCloseEvent *event) override;
+        //void closeEvent(QCloseEvent *event) override;
     private slots:
-        void print();
-        void open();
-        void save(std::string="");// Handles save and save as
+        //void print();
+        //void open(QString filename);
+        //void save(QString filename);// Handles save and save as
     signals:
-        // Signals sent to editor
+        // Signals sent to editor from menu
         void cut();
         void copy();
         void paste();
@@ -40,9 +47,12 @@ class MainWindow : public QMainWindow
     private:
         QTextEdit *textEditor;
         QScrollBar *scrollBar;
-        QStatusBar *statusBar;
+        QTextDocument *loadedDoc;
+        //QGridLayout *windowLayout;
+        QVBoxLayout *vbox;
         QMenu *menuFile;
         QMenu *menuEdit;
+        QMenuBar *menuBar;
         QAction actionNew;
         QAction actionOpen;
         QAction actionSave;
@@ -57,4 +67,4 @@ class MainWindow : public QMainWindow
         QAction actionSelectAll;
 };
 
-#endif // MAINWINDOW_H_
+#endif // MAINWINDOW_HPP
