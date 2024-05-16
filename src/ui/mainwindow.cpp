@@ -27,17 +27,17 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
             this, &CnoteWindow::setChanged);
 
         QObject::connect(actionCut, &QAction::triggered, 
-            textEditor, QTextEdit::cut);
+            textEditor, &QTextEdit::cut);
         QObject::connect(actionCopy, &QAction::triggered, 
-            textEditor, QTextEdit::copy);
+            textEditor, &QTextEdit::copy);
         QObject::connect(actionPaste, &QAction::triggered, 
-            textEditor, QTextEdit::paste);
+            textEditor, &QTextEdit::paste);
         QObject::connect(actionUndo, &QAction::triggered, 
-            textEditor, QTextEdit::undo);
+            textEditor, &QTextEdit::undo);
         QObject::connect(actionRedo, &QAction::triggered, 
-            textEditor, QTextEdit::redo);
+            textEditor, &QTextEdit::redo);
         QObject::connect(actionSelectAll, &QAction::triggered, 
-            textEditor, QTextEdit::selectAll);
+            textEditor, &QTextEdit::selectAll);
 }
 
 void CnoteWindow::createMenus(){
