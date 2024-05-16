@@ -32,7 +32,7 @@ class CnoteWindow : public QWidget
         void setChanged();
         void openFile();
         void newFile();
-        void saveFile(QString saveTo = "");// Handles save and save as
+        void saveFile();// Handles save and save as
         void saveFileAs();
     signals:
         // Signals sent to editor from menu
