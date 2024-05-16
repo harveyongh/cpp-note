@@ -22,6 +22,8 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
             this, &CnoteWindow::newFile);
         QObject::connect(actionSave, &QAction::triggered,
             this, &CnoteWindow::saveFile);
+        QObject::connect(actionSaveAs, &QAction::triggered,
+            &CnoteWindow::saveFileAs);
 
         QObject::connect(textEditor, &QTextEdit::textChanged,
             this, &CnoteWindow::setChanged);
