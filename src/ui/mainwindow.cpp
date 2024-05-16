@@ -25,6 +25,19 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
 
         QObject::connect(textEditor, &QTextEdit::textChanged,
             this, &CnoteWindow::setChanged);
+
+        QObject::connect(actionCut, &QAction::triggered, 
+            textEditor, QTextEdit::cut);
+        QObject::connect(actionCopy, &QAction::triggered, 
+            textEditor, QTextEdit::copy);
+        QObject::connect(actionPaste, &QAction::triggered, 
+            textEditor, QTextEdit::paste);
+        QObject::connect(actionUndo, &QAction::triggered, 
+            textEditor, QTextEdit::undo);
+        QObject::connect(actionRedo, &QAction::triggered, 
+            textEditor, QTextEdit::redo);
+        QObject::connect(actionSelectAll, &QAction::triggered, 
+            textEditor, QTextEdit::selectAll);
 }
 
 void CnoteWindow::createMenus(){
@@ -33,7 +46,7 @@ void CnoteWindow::createMenus(){
     QList<QAction*> fileActions = {actionNew, actionOpen,
         actionSave, actionSaveAs, actionPrint};
     QList<QAction*> editActions = {actionCut, actionCopy,actionPaste, 
-        actionUndo, actionRedo, actionDelete, actionSelectAll};
+        actionUndo, actionRedo, actionSelectAll};
 
     menuFile->addActions(fileActions);
     menuEdit->addActions(editActions);
@@ -50,7 +63,6 @@ void CnoteWindow::createActions(){
     actionPaste = new QAction ("&Paste", this);
     actionUndo = new QAction ("&Undo", this);
     actionRedo = new QAction ("&Redo", this);
-    actionDelete = new QAction ("&Delete", this);
     actionSelectAll = new QAction ("&Select all", this);
 }
 
