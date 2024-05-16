@@ -82,9 +82,15 @@ void CnoteWindow::openFile(){
     }
 }
 
-void CnoteWindow::saveFile(){
+void CnoteWindow::saveFile(QString saveTo = ""){
+    QString saveFilename;
+    if (saveTo == ""){
+        saveFilename = filename;
+    }else{
+        saveFilename = saveTo;
+    }
     if (checkFileChanged){
-        QSaveFile file(filename);
+        QSaveFile file(saveFilename);
         if (file.open(QFile::WriteOnly | QFile::Text)){
             QTextStream fileOut(&file);
             fileOut << textEditor->toPlainText();
