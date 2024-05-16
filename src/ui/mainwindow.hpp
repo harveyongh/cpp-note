@@ -64,7 +64,6 @@ class CnoteWindow : public QWidget
         QAction *actionPaste;
         QAction *actionUndo;
         QAction *actionRedo;
-        QAction *actionDelete;
         QAction *actionSelectAll;
 };
 
