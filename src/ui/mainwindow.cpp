@@ -23,7 +23,7 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         QObject::connect(actionSave, &QAction::triggered,
             this, &CnoteWindow::saveFile);
         QObject::connect(actionSaveAs, &QAction::triggered,
-            &CnoteWindow::saveFileAs);
+            this, &CnoteWindow::saveFileAs);
 
         QObject::connect(textEditor, &QTextEdit::textChanged,
             this, &CnoteWindow::setChanged);
@@ -84,15 +84,9 @@ void CnoteWindow::openFile(){
     }
 }
 
-void CnoteWindow::saveFile(QString saveTo = ""){
-    QString saveFilename;
-    if (saveTo == ""){
-        saveFilename = filename;
-    }else{
-        saveFilename = saveTo;
-    }
+void CnoteWindow::saveFile(){
     if (checkFileChanged){
-        QSaveFile file(saveFilename);
+        QSaveFile file(filename);
         if (file.open(QFile::WriteOnly | QFile::Text)){
             QTextStream fileOut(&file);
             fileOut << textEditor->toPlainText();
@@ -105,11 +99,15 @@ void CnoteWindow::saveFile(QString saveTo = ""){
 }
 
 void CnoteWindow::saveFileAs(){
-    QString saveAsName = QFileDialog::getSaveFileName(this,
+    QString saveAsName;
+    saveAsName = QFileDialog::getSaveFileName(this,
         tr("Save current file as"), QDir::currentPath(), 
         tr("Text Files (*.txt *.rtf *.csv)"));
     if (saveAsName != ""){
-        saveFile(saveAsName);
+        QString origFilename = filename;
+        filename = saveAsName;
+        saveFile();
+        filename = origFilename;
     }else{
         qWarning("Error: invalid file chosen!");
     }
