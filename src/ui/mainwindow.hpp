@@ -33,7 +33,7 @@ class CnoteWindow : public QWidget
         void openFile();
         void newFile();
         void saveFile(QString saveTo = "");// Handles save and save as
-        void renameSave();
+        void saveFileAs();
     signals:
         // Signals sent to editor from menu
         void cut();
