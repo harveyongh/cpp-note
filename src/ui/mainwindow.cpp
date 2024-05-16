@@ -105,9 +105,11 @@ void CnoteWindow::saveFileAs(){
         tr("Text Files (*.txt *.rtf *.csv)"));
     if (saveAsName != ""){
         QString origFilename = filename;
+        bool origChangeState = checkFileChanged;
         filename = saveAsName;
         saveFile();
         filename = origFilename;
+        checkFileChanged = origChangeState;
     }else{
         qWarning("Error: invalid file chosen!");
     }
