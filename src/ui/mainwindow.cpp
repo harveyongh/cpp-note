@@ -20,9 +20,11 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
             this, &CnoteWindow::openFile);
         QObject::connect(actionNew, &QAction::triggered,
             this, &CnoteWindow::newFile);
+        QObject::connect(actionSave, &QAction::triggered,
+            this, &CnoteWindow::saveFile);
 
-        QObject::connect(textEditor, SIGNAL (textChanged()), 
-            this, SLOT (setChanged()));
+        QObject::connect(textEditor, &QTextEdit::textChanged,
+            this, &CnoteWindow::setChanged);
 }
 
 void CnoteWindow::createMenus(){
@@ -58,14 +60,28 @@ void CnoteWindow::openFile(){
         tr("Text Files (*.txt *.rtf *.csv)"));
     QFile file(filename);
 
-    if (!file.open(QFile::ReadOnly | QFile::Text)){
+    if (file.open(QFile::ReadOnly | QFile::Text)){
+        QTextStream fileIn(&file);
+        textEditor->setText(fileIn.readAll());
+        checkFileChanged = false;
+        file.close();
+    }else{
         qWarning("Error opening selected file!");
     }
+}
 
-    QTextStream fileIn(&file);
-    textEditor->setText(fileIn.readAll());
-    checkFileChanged = false;
-    file.close();
+void CnoteWindow::saveFile(){
+    if (checkFileChanged){
+        QSaveFile file(filename);
+        if (file.open(QFile::WriteOnly | QFile::Text)){
+            QTextStream fileOut(&file);
+            fileOut << textEditor->toPlainText();
+            checkFileChanged = false;
+            file.commit();
+        }else{
+            qWarning("Error saving to file!");
+        }
+    }
 }
 
 void CnoteWindow::newFile(){
