@@ -102,6 +102,17 @@ void CnoteWindow::saveFile(QString saveTo = ""){
     }
 }
 
+void CnoteWindow::saveFileAs(){
+    QString saveAsName = QFileDialog::getSaveFileName(this,
+        tr("Save current file as"), QDir::currentPath(), 
+        tr("Text Files (*.txt *.rtf *.csv)"));
+    if (saveAsName != ""){
+        saveFile(saveAsName);
+    }else{
+        qWarning("Error: invalid file chosen!");
+    }
+}
+
 void CnoteWindow::newFile(){
     textEditor->setText("");
     filename = "";
