@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include <QDir>
 #include <QFileDialog>
+#include <QMessageBox>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -118,10 +119,43 @@ void CnoteWindow::saveFileAs(){
     }
 }
 
+int CnoteWindow::confirmUnsaved(){
+    QMessageBox confirmMsg;
+    confirmMsg.setText("The document has unsaved changes.");
+    confirmMsg.setInformativeText("Would you like to save first?");
+    confirmMsg.setStandardButtons(QMessageBox::Save |
+        QMessageBox::Discard | QMessageBox::Cancel);
+    confirmMsg.setDefaultButton(QMessageBox::Save);
+    int selection = confirmMsg.exec();
+
+    switch (selection)
+    {
+    case QMessageBox::Save:
+        saveFile();
+        return 0;
+        break;
+    case QMessageBox::Discard:
+        return 1;
+        break;
+    case QMessageBox::Cancel:
+        return 2;
+        break;
+    default:
+        // Not a valid option
+        break;
+    }
+}
+
 void CnoteWindow::newFile(){
-    textEditor->setText("");
-    filename = "";
-    checkFileChanged = false;
+    if (checkFileChanged){
+        int discardChanges = confirmUnsaved();
+        if (discardChanges != 2){
+            textEditor->setText("");
+            filename = "";
+            checkFileChanged = false;
+        }
+    }
+    
 }
 
 void CnoteWindow::setChanged(){
