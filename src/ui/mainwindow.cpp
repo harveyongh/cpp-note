@@ -2,6 +2,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QPrinter>
+#include <QPrintDialog>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -149,8 +151,18 @@ int CnoteWindow::confirmUnsaved(){
         break;
     default:
         // Not a valid option
+        return 2;
         break;
     }
+}
+
+void CnoteWindow::printDocument(){
+    QPrinter printer;
+    QPrintDialog printDialog (&printer, this);
+    if (printDialog.exec() == QDialog::Accepted){
+        textEditor->print(&printer);
+    }
+    return;
 }
 
 void CnoteWindow::newFile(){
