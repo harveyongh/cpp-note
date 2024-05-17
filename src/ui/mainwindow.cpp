@@ -56,6 +56,8 @@ void CnoteWindow::closeEvent(QCloseEvent *event){
         } else if (discardChanges == 2){
             event->ignore();
         }
+    } else{
+        event->accept();
     }
 }
 
