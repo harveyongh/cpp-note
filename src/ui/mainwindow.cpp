@@ -70,6 +70,12 @@ void CnoteWindow::createActions(){
 }
 
 void CnoteWindow::openFile(){
+    if (checkFileChanged){
+        int discardChanges = confirmUnsaved();
+        if (discardChanges == 2){
+            return;
+        }
+    }
     filename = QFileDialog::getOpenFileName(this,
         tr("Open Text File"), QDir::currentPath(), 
         tr("Text Files (*.txt *.rtf *.csv)"));
@@ -135,6 +141,7 @@ int CnoteWindow::confirmUnsaved(){
         return 0;
         break;
     case QMessageBox::Discard:
+        checkFileChanged = false;
         return 1;
         break;
     case QMessageBox::Cancel:
