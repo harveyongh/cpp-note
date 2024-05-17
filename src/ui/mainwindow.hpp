@@ -46,7 +46,7 @@ class CnoteWindow : public QWidget
     private:
         void createActions();
         void createMenus();
-        bool confirmUnsaved();
+        //bool confirmUnsaved();
     private:
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
