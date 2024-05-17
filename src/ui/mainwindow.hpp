@@ -28,7 +28,7 @@ class CnoteWindow : public QWidget
     protected:
         //void closeEvent(QCloseEvent *event) override;
     private slots:
-        //void print();
+        void printDocument();
         void setChanged();
         void openFile();
         void newFile();
