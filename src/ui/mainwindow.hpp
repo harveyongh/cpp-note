@@ -46,12 +46,12 @@ class CnoteWindow : public QWidget
     private:
         void createActions();
         void createMenus();
-        //bool confirmUnsaved();
+        int confirmUnsaved();
     private:
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
         QVBoxLayout *vbox;
-        QDialog *confirmDialog;
+        QDialog *confirmUnsavedDialog;
         QMenu *menuFile;
         QMenu *menuEdit;
         QMenuBar *menuBar;
