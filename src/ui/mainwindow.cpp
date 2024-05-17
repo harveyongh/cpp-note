@@ -157,12 +157,12 @@ void CnoteWindow::newFile(){
     if (checkFileChanged){
         int discardChanges = confirmUnsaved();
         if (discardChanges != 2){
-            textEditor->setText("");
-            filename = "";
-            checkFileChanged = false;
+            return;
         }
     }
-    
+    textEditor->setText("");
+    filename = "";
+    checkFileChanged = false;
 }
 
 void CnoteWindow::setChanged(){
