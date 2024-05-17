@@ -27,6 +27,8 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
             this, &CnoteWindow::saveFile);
         QObject::connect(actionSaveAs, &QAction::triggered,
             this, &CnoteWindow::saveFileAs);
+        QObject::connect(actionPrint, &QAction::triggered,
+            this, &CnoteWindow::printDocument);
 
         QObject::connect(textEditor, &QTextEdit::textChanged,
             this, &CnoteWindow::setChanged);
