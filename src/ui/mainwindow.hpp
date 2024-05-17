@@ -26,7 +26,7 @@ class CnoteWindow : public QWidget
         QString filename = "";
         bool checkFileChanged = false;
     protected:
-        //void closeEvent(QCloseEvent *event) override;
+        void closeEvent(QCloseEvent *event) override;
     private slots:
         void printDocument();
         void setChanged();

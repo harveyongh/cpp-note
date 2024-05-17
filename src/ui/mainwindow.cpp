@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QCloseEvent>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -45,6 +46,17 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
             textEditor, &QTextEdit::redo);
         QObject::connect(actionSelectAll, &QAction::triggered, 
             textEditor, &QTextEdit::selectAll);
+}
+
+void CnoteWindow::closeEvent(QCloseEvent *event){
+    if (checkFileChanged){
+        int discardChanges = confirmUnsaved();
+        if (discardChanges != 2){
+            event->accept();
+        } else if (discardChanges == 2){
+            event->ignore();
+        }
+    }
 }
 
 void CnoteWindow::createMenus(){
