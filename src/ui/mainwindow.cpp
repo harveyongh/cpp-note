@@ -5,6 +5,7 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QCloseEvent>
+#include <QToolButton>
 
 
 CnoteWindow::CnoteWindow(QWidget *parent) :
@@ -13,7 +14,8 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         createActions();
         createMenus();
         textEditor = new QTextEdit(this);
-        buttonBar = new CnoteButtonBar(this);
+        buttonBar = new QToolBar(this);
+        createButtonBar();
         // Layout settings
         setWindowTitle("C++Note");
         resize(600, 400);
@@ -23,21 +25,21 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         vbox->addWidget(textEditor);
 
         // External signals
-        QObject::connect(buttonBar->buttonNew, &QToolButton::triggered,
+        QObject::connect(buttonNew, &QToolButton::clicked,
             this, &CnoteWindow::newFile);
-        QObject::connect(buttonBar->buttonOpen, &QToolButton::triggered,
+        QObject::connect(buttonOpen, &QToolButton::clicked,
             this, &CnoteWindow::openFile);
-        QObject::connect(buttonBar->buttonSave, &QToolButton::triggered,
+        QObject::connect(buttonSave, &QToolButton::clicked,
             this, &CnoteWindow::saveFile);
-        QObject::connect(buttonBar->buttonCut, &QToolButton::triggered,
+        QObject::connect(buttonCut, &QToolButton::clicked,
             textEditor, &QTextEdit::cut);
-        QObject::connect(buttonBar->buttonCopy, &QToolButton::triggered,
+        QObject::connect(buttonCopy, &QToolButton::clicked,
             textEditor, &QTextEdit::copy);
-        QObject::connect(buttonBar->buttonPaste, &QToolButton::triggered,
+        QObject::connect(buttonPaste, &QToolButton::clicked,
             textEditor, &QTextEdit::paste);
-        QObject::connect(buttonBar->buttonUndo, &QToolButton::triggered,
+        QObject::connect(buttonUndo, &QToolButton::clicked,
             textEditor, &QTextEdit::undo);
-        QObject::connect(buttonBar->buttonRedo, &QToolButton::triggered,
+        QObject::connect(buttonRedo, &QToolButton::clicked,
             textEditor, &QTextEdit::redo);
 
         QObject::connect(actionOpen, &QAction::triggered, 
@@ -215,4 +217,43 @@ void CnoteWindow::newFile(){
 
 void CnoteWindow::setChanged(){
     checkFileChanged = true;
+}
+
+void CnoteWindow::createButtonBar(){
+    buttonNew = new QToolButton(this);
+    buttonNew->setToolTip(tr("New file"));
+    buttonOpen = new QToolButton(this);
+    buttonOpen->setToolTip(tr("Open existing file"));
+    buttonSave = new QToolButton(this);
+    buttonSave->setToolTip(tr("Save file"));
+    buttonCut = new QToolButton(this);
+    buttonCut->setToolTip(tr("Cut selection"));
+    buttonCopy = new QToolButton(this);
+    buttonCopy->setToolTip(tr("Copy selection"));
+    buttonPaste = new QToolButton(this);
+    buttonPaste->setToolTip(tr("Paste from clipboard"));
+    buttonUndo = new QToolButton(this);
+    buttonUndo->setToolTip(tr("Undo last"));
+    buttonRedo = new QToolButton(this);
+    buttonRedo->setToolTip(tr("Redo last"));
+
+    buttonBar->addWidget(buttonNew);
+    buttonBar->addWidget(buttonOpen);
+    buttonBar->addWidget(buttonSave);
+    buttonBar->addSeparator();
+    buttonBar->addWidget(buttonCut);
+    buttonBar->addWidget(buttonCopy);
+    buttonBar->addWidget(buttonPaste);
+    buttonBar->addSeparator();
+    buttonBar->addWidget(buttonUndo);
+    buttonBar->addWidget(buttonRedo);
+
+    buttonNew->setIcon(QIcon("../src/ui/icons/file.svg"));
+    buttonOpen->setIcon(QIcon("../src/ui/icons/folder-open.svg"));
+    buttonSave->setIcon(QIcon("../src/ui/icons/floppy-disk.svg"));
+    buttonCut->setIcon(QIcon("../src/ui/icons/scissors.svg"));
+    buttonCopy->setIcon(QIcon("../src/ui/icons/copy.svg"));
+    buttonPaste->setIcon(QIcon("../src/ui/icons/paste.svg"));
+    buttonUndo->setIcon(QIcon("../src/ui/icons/rotate-left.svg"));
+    buttonRedo->setIcon(QIcon("../src/ui/icons/rotate-right.svg"));
 }
