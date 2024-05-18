@@ -13,3 +13,6 @@ The executable can then be run using
 ``` sh
 ./cppnote
 ```
+
+## Icons
+Icons used for the button toolbar are sourced from [Free Icons](https://github.com/free-icons/free-icons) and used under a [CC BY 4.0 license](https://github.com/free-icons/free-icons/blob/master/LICENSE).
