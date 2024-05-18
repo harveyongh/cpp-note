@@ -22,6 +22,24 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         vbox->addWidget(buttonBar);
         vbox->addWidget(textEditor);
 
+        // External signals
+        QObject::connect(buttonBar->buttonNew, &QToolButton::triggered,
+            this, &CnoteWindow::newFile);
+        QObject::connect(buttonBar->buttonOpen, &QToolButton::triggered,
+            this, &CnoteWindow::openFile);
+        QObject::connect(buttonBar->buttonSave, &QToolButton::triggered,
+            this, &CnoteWindow::saveFile);
+        QObject::connect(buttonBar->buttonCut, &QToolButton::triggered,
+            textEditor, &QTextEdit::cut);
+        QObject::connect(buttonBar->buttonCopy, &QToolButton::triggered,
+            textEditor, &QTextEdit::copy);
+        QObject::connect(buttonBar->buttonPaste, &QToolButton::triggered,
+            textEditor, &QTextEdit::paste);
+        QObject::connect(buttonBar->buttonUndo, &QToolButton::triggered,
+            textEditor, &QTextEdit::undo);
+        QObject::connect(buttonBar->buttonRedo, &QToolButton::triggered,
+            textEditor, &QTextEdit::redo);
+
         QObject::connect(actionOpen, &QAction::triggered, 
             this, &CnoteWindow::openFile);
         QObject::connect(actionNew, &QAction::triggered,
