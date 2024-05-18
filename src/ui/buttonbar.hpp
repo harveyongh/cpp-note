@@ -11,7 +11,9 @@ class CnoteButtonBar : public QWidget
         CnoteButtonBar(QWidget *parent);
 
     private:
+        void setupToolbar();
         void createButtons();
+        void setIcons();
 
         QToolBar *buttonBar;
 
