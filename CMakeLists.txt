@@ -7,6 +7,7 @@ project(c-note)
 
 set(SOURCE_FILES src/cppnote.cpp
   src/ui/mainwindow.cpp
+  src/ui/buttonbar.cpp
 )
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Core PrintSupport)
