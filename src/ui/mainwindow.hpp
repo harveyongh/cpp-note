@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
-#include "buttonbar.hpp"
 #include <QAction>
 #include <QMainWindow>
 #include <QWidget>
@@ -17,6 +16,8 @@
 #include <QSaveFile>
 #include <QLayout>
 #include <QList>
+#include <QToolBar>
+#include <QToolButton>
 
 class CnoteWindow : public QWidget
 {
@@ -47,9 +48,10 @@ class CnoteWindow : public QWidget
     private:
         void createActions();
         void createMenus();
+        void createButtonBar();
         int confirmUnsaved();
     private:
-        CnoteButtonBar *buttonBar;
+        QToolBar *buttonBar;
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
         QVBoxLayout *vbox;
@@ -68,6 +70,14 @@ class CnoteWindow : public QWidget
         QAction *actionUndo;
         QAction *actionRedo;
         QAction *actionSelectAll;
+        QToolButton *buttonNew;
+        QToolButton *buttonOpen;
+        QToolButton *buttonSave;
+        QToolButton *buttonCut;
+        QToolButton *buttonCopy;
+        QToolButton *buttonPaste;
+        QToolButton *buttonUndo;
+        QToolButton *buttonRedo;
 };
 
 #endif // MAINWINDOW_HPP
