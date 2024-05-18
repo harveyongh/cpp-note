@@ -17,6 +17,7 @@ class CnoteButtonBar : public QWidget
 
         QToolBar *buttonBar;
 
+    public:
         QToolButton *buttonNew;
         QToolButton *buttonOpen;
         QToolButton *buttonSave;
