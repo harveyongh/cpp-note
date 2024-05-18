@@ -49,7 +49,7 @@ class CnoteWindow : public QWidget
         void createMenus();
         int confirmUnsaved();
     private:
-        CnoteButtonBar *buttonbar;
+        CnoteButtonBar *buttonBar;
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
         QVBoxLayout *vbox;

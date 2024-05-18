@@ -13,11 +13,13 @@ CnoteWindow::CnoteWindow(QWidget *parent) :
         createActions();
         createMenus();
         textEditor = new QTextEdit(this);
+        buttonBar = new CnoteButtonBar(this);
         // Layout settings
         setWindowTitle("C++Note");
         resize(600, 400);
         vbox = new QVBoxLayout(this);
         vbox->addWidget(menuBar);
+        vbox->addWidget(buttonBar);
         vbox->addWidget(textEditor);
 
         QObject::connect(actionOpen, &QAction::triggered, 
