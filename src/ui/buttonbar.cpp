@@ -8,15 +8,37 @@ CnoteButtonBar::CnoteButtonBar(QWidget *parent) :
         setupToolbar();
     }
 
+void CnoteButtonBar::setupToolbar(){
+    buttonBar = new QToolBar(this);
+    buttonBar->addWidget(buttonNew);
+    buttonBar->addWidget(buttonOpen);
+    buttonBar->addWidget(buttonSave);
+    buttonBar->addSeparator();
+    buttonBar->addWidget(buttonCut);
+    buttonBar->addWidget(buttonCopy);
+    buttonBar->addWidget(buttonPaste);
+    buttonBar->addSeparator();
+    buttonBar->addWidget(buttonUndo);
+    buttonBar->addWidget(buttonRedo);
+}
+
 void CnoteButtonBar::createButtons(){
     buttonNew = new QToolButton(this);
+    buttonNew->setToolTip(tr("New file"));
     buttonOpen = new QToolButton(this);
+    buttonOpen->setToolTip(tr("Open existing file"));
     buttonSave = new QToolButton(this);
+    buttonSave->setToolTip(tr("Save file"));
     buttonCut = new QToolButton(this);
+    buttonCut->setToolTip(tr("Cut selection"));
     buttonCopy = new QToolButton(this);
+    buttonCopy->setToolTip(tr("Copy selection"));
     buttonPaste = new QToolButton(this);
+    buttonPaste->setToolTip(tr("Paste from clipboard"));
     buttonUndo = new QToolButton(this);
+    buttonUndo->setToolTip(tr("Undo last"));
     buttonRedo = new QToolButton(this);
+    buttonRedo->setToolTip(tr("Redo last"));
 }
 
 void CnoteButtonBar::setIcons(){
