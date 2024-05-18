@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
+#include "buttonbar.hpp"
 #include <QAction>
 #include <QMainWindow>
 #include <QWidget>
@@ -48,6 +49,7 @@ class CnoteWindow : public QWidget
         void createMenus();
         int confirmUnsaved();
     private:
+        CnoteButtonBar *buttonbar;
         QTextEdit *textEditor;
         QTextDocument *loadedDoc;
         QVBoxLayout *vbox;
